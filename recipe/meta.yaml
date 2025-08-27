@@ -1,43 +1,48 @@
 {% set name = "texttable" %}
-{% set version = "1.6.4" %}
-{% set sha256 = "42ee7b9e15f7b225747c3fa08f43c5d6c83bc899f80ff9bae9319334824076e9" %}
+{% set version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 2d2068fb55115807d3ac77a4ca68fa48803e84ebb0ee2340f858107a36522638
 
 build:
-  noarch: python
   number: 0
-  script: python -m pip install . --no-deps --ignore-installed
+  script: python -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - python =2.7|>=3.5
+    - python
+    - wheel
     - setuptools
-
   run:
-    - python =2.7|>=3.5
+    - python
 
 test:
+  source_files:
+    - tests.py
   imports:
     - texttable
+  commands:
+    - pip check
+    - pytest -v tests.py
+  requires:
+    - pip
+    - pytest
 
 about:
-  home: https://github.com/foutaise/texttable/
-  license: LGPL-3.0-only
-  license_family: LGPL
-  license_file: {{ environ["RECIPE_DIR"] }}/LICENSE
+  home: https://github.com/foutaise/texttable
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
   summary: Python module for creating simple ASCII tables
   description: texttable is a module to generate a formatted text table, using ASCII characters.
   doc_url: https://github.com/foutaise/texttable#documentation
-  dev_url: https://github.com/foutaise/texttable/
+  dev_url: https://github.com/foutaise/texttable
 
 extra:
   recipe-maintainers:
