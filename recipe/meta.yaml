@@ -1,13 +1,13 @@
 {% set name = "texttable" %}
-{% set version = "1.7.0" %}
+{% set version = "1.7.2" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2d2068fb55115807d3ac77a4ca68fa48803e84ebb0ee2340f858107a36522638
+  sha256: dc16ea6b35fbf5291ba6ef79d79e37d9b3ca6acd7bae3ca3450488d7c2e19c99
 
 build:
   number: 0
